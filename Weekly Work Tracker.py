@@ -1,31 +1,34 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv("Work_hours.csv")  
-print(df) 
+try:
+    df = pd.read_csv("work_hours.csv")
+except FileNotFoundError:
+    df = pd.DataFrame(columns=["date", "hours"])
 
-today = datetime.now()
-weekday = today.weekday()
-monday = today - timedelta(days=weekday)
 
-week_str = monday.date().isoformat()# Turn monday into a “YYYY-MM-DD” string
-new_hours = float(input("hours worked today: "))
+today_str = datetime.now().date().isoformat()
 
-if week_str in df["week_start"].values:
-    df.loc[df["week_start"] == week_str, "hours"] += new_hours
+new_hours = float(input("Hours worked today: "))
+
+if today_str in df["date"].values:
+    # Add to today's existing hours
+    df.loc[df["date"] == today_str, "hours"] += new_hours
 else:
     new_row = pd.DataFrame({
-        "week_start": [week_str],
+        "date": [today_str],
         "hours": [new_hours]
     })
     df = pd.concat([df, new_row], ignore_index=True)
-df.to_csv("Work_hours.csv", index=False)
 
-plt.bar(df["week_start"],df['hours'])
-plt.xticks(rotation= 45)# This makes the labels easier to read when they're long 
-plt.title('Weekly Work hours')
+df.to_csv("work_hours.csv", index=False)
+
+# Plot daily hours
+plt.bar(df["date"], df["hours"])
+plt.xticks(rotation=45)# This makes the labels easier to read when they're long 
+plt.title("Daily Work Hours")
 plt.tight_layout()# automatically adjusts everything
 plt.show()
 
