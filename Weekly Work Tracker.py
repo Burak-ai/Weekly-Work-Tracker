@@ -24,4 +24,10 @@ else:
 df.to_csv("Work_hours.csv", index=False)
 
 
+plt.bar(df["week_start"],df['hours'])
+plt.xticks(rotation= 45)
+plt.title('Weekly Work hours')
+plt.tight_layout()
+plt.show()
+
 
