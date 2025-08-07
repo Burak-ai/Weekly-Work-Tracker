@@ -26,7 +26,7 @@ df.to_csv("Work_hours.csv", index=False)
 
 
 plt.bar(df["week_start"],df['hours'])
-plt.xticks(rotation= 45)
+plt.xticks(rotation= 45)# This makes the labels easier to read when they're long 
 plt.title('Weekly Work hours')
 plt.tight_layout()
 plt.show()
