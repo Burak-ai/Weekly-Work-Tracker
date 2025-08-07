@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("work_hours.csv")  
+df = pd.read_csv("Work_hours.csv")  
 print(df) 
 
 today = datetime.now()
