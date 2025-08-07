@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import pandas as pd
+import matplotlib as plt
 
 df = pd.read_csv("work_hours.csv")  
 print(df) 
