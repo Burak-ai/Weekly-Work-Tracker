@@ -10,7 +10,7 @@ weekday = today.weekday()
 monday = today - timedelta(days=weekday)
 
 week_str = monday.date().isoformat()
-new_hour = float(input("hours worked today: "))
+new_hours = float(input("hours worked today: "))
 
 
 if week_str in df["week_start"].values:
