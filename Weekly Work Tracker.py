@@ -10,17 +10,16 @@ weekday = today.weekday()
 monday = today - timedelta(days=weekday)
 
 week_str = monday.date().isoformat()
-new_hours = float(input("hours worked today: "))
-
+new_hour = float(input("hours worked today: "))
 
 if week_str in df["week_start"].values:
-    df.loc[df["week_start"] == week_str, "hours"] += new_hours
+    df.loc[df["week_start"] == week_str, "hours"] += new_hour
 else:
-        new_row = pd.DataFrame({
+    new_row = pd.DataFrame({
         "week_start": [week_str],
-        "hours":      [new_hours]
+        "hours": [new_hour]
     })
-        df = pd.concat([df, new_row], ignore_index=True)
+    df = pd.concat([df, new_row], ignore_index=True)
 
 df.to_csv("Work_hours.csv", index=False)
 
